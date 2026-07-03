@@ -184,11 +184,16 @@ a:hover,
 /* Jazzmin login polish */
 .login-page {
   min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
   background: #f8fafc !important;
 }
 
 .login-box {
   width: min(360px, calc(100vw - 32px)) !important;
+  margin: 0 auto !important;
 }
 
 .login-logo {
