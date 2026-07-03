@@ -1,0 +1,101 @@
+{% extends "backoffice/shell.html" %}
+{% block title %}{{ admin_copy.bookings.title }}{% endblock %}
+{% block admin_content %}
+<form class="admin-filter-bar" method="get">
+  <input type="hidden" name="lang" value="{{ admin_locale }}">
+  <div class="admin-filter-main admin-filter-main--bookings">
+    <label>
+      <span>{{ admin_copy.bookings.filters.from }}</span>
+      <input type="date" name="from" min="{{ today }}" value="{{ date_from }}">
+    </label>
+    <label>
+      <span>{{ admin_copy.bookings.filters.to }}</span>
+      <input type="date" name="to" min="{{ today }}" value="{{ date_to }}">
+    </label>
+    <button class="admin-button" type="submit">{{ admin_copy.bookings.filters.filter }}</button>
+    <a class="admin-ghost" href="{% url 'backoffice_bookings' %}{{ admin_lang_query }}">{{ admin_copy.bookings.filters.clear }}</a>
+  </div>
+  <div class="admin-filter-quick">
+    <a class="admin-ghost" href="{% url 'backoffice_bookings' %}?lang={{ admin_locale }}&from={{ today }}&to={{ today }}">{{ admin_copy.bookings.filters.today }}</a>
+    <a class="admin-ghost" href="{% url 'backoffice_bookings' %}?lang={{ admin_locale }}&from={{ tomorrow }}&to={{ tomorrow }}">{{ admin_copy.bookings.filters.tomorrow }}</a>
+  </div>
+</form>
+
+<div class="admin-stats">
+  <div><span>{{ admin_copy.bookings.stats.total }}</span><strong>{{ counts.total }}</strong></div>
+  <div><span>{{ admin_copy.bookings.stats.new }}</span><strong>{{ counts.new }}</strong></div>
+  <div><span>{{ admin_copy.bookings.stats.accepted }}</span><strong>{{ counts.accepted }}</strong></div>
+</div>
+
+{% if bookings %}
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>{{ admin_copy.bookings.table.guest }}</th>
+          <th>{{ admin_copy.bookings.table.phone }}</th>
+          <th>{{ admin_copy.bookings.table.date }}</th>
+          <th>{{ admin_copy.bookings.table.time }}</th>
+          <th>{{ admin_copy.bookings.table.people }}</th>
+          <th>{{ admin_copy.bookings.table.source }}</th>
+          <th>{{ admin_copy.bookings.table.status }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for booking in bookings %}
+        <tr>
+          <td><strong>{{ booking.customer_name }}</strong><small>{{ booking.created_at }}</small></td>
+          <td>{{ booking.phone }}</td>
+          <td>{{ booking.booking_date }}</td>
+          <td>{{ booking.booking_time|time:"H:i" }}</td>
+          <td>{{ booking.people_count }}</td>
+          <td>{{ booking.locale|upper }}</td>
+          <td>
+            <form class="admin-inline-form" method="post" action="{% url 'backoffice_booking_status' booking.pk %}">
+              {% csrf_token %}
+              <input type="hidden" name="lang" value="{{ admin_locale }}">
+              <details class="admin-status-select">
+                <summary class="admin-status-select__button">
+                  {% if booking.status == 'new' %}{{ admin_copy.status.new }}{% elif booking.status == 'accepted' %}{{ admin_copy.status.accepted }}{% else %}{{ admin_copy.status.canceled }}{% endif %}
+                  <span aria-hidden="true">▾</span>
+                </summary>
+                <div class="admin-status-select__menu">
+                  {% for status in statuses %}
+                    <button class="{% if booking.status == status %}is-active{% endif %}" name="status" type="submit" value="{{ status }}">
+                      {% if status == 'new' %}{{ admin_copy.status.new }}{% elif status == 'accepted' %}{{ admin_copy.status.accepted }}{% else %}{{ admin_copy.status.canceled }}{% endif %}
+                    </button>
+                  {% endfor %}
+                </div>
+              </details>
+            </form>
+          </td>
+          <td>
+            <form class="admin-delete-form" method="post" action="{% url 'backoffice_booking_delete' booking.pk %}">
+              {% csrf_token %}
+              <input type="hidden" name="lang" value="{{ admin_locale }}">
+              <input class="admin-confirm-state" id="admin-delete-{{ booking.pk }}" type="checkbox">
+              <label class="admin-danger" for="admin-delete-{{ booking.pk }}" role="button">{{ admin_copy.confirm.delete }}</label>
+              <div class="admin-confirm" role="presentation">
+                <label class="admin-confirm__backdrop" for="admin-delete-{{ booking.pk }}" aria-label="{{ admin_copy.confirm.cancel }}"></label>
+                <div class="admin-confirm__dialog" role="dialog" aria-modal="true" aria-labelledby="admin-delete-title-{{ booking.pk }}">
+                  <p class="admin-eyebrow">{{ admin_copy.confirm.eyebrow }}</p>
+                  <h2 id="admin-delete-title-{{ booking.pk }}">{{ admin_copy.bookings.deleteTitle }}</h2>
+                  <p>{% if admin_locale == 'jp' %}{{ booking.customer_name }} 様の予約を削除しますか？{% elif admin_locale == 'ru' %}Удалить бронирование для {{ booking.customer_name }}?{% elif admin_locale == 'uz' %}{{ booking.customer_name }} uchun bandlov o'chirilsinmi?{% else %}Delete booking for {{ booking.customer_name }}?{% endif %}</p>
+                  <div class="admin-confirm__actions">
+                    <label class="admin-ghost" for="admin-delete-{{ booking.pk }}" role="button">{{ admin_copy.confirm.cancel }}</label>
+                    <button class="admin-danger" type="submit">{{ admin_copy.confirm.delete }}</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="admin-empty">{{ admin_copy.bookings.empty }}</p>
+{% endif %}
+{% endblock %}

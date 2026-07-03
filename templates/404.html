@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<main class="not-found-page">
+  <section class="not-found-card">
+    <a class="not-found-logo" href="/en/" aria-label="Jingisukan Izakaya home">
+      <img src="{{ site_logo_url }}" alt="">
+    </a>
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
+    <p>The page you are looking for is not here. Please return to the restaurant page.</p>
+    <a class="button button-primary" href="/en/">Back to home</a>
+  </section>
+</main>
+{% endblock %}

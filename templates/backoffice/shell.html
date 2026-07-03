@@ -1,0 +1,48 @@
+{% extends "backoffice/base.html" %}
+{% block body %}
+<main class="admin-shell">
+  <aside class="admin-sidebar">
+    <input class="admin-menu-state" id="admin-menu" type="checkbox">
+    <a class="admin-brand" href="{% url 'backoffice_bookings' %}{{ admin_lang_query }}" aria-label="Jingisukan Admin">
+      <img src="{{ site_logo_url }}" alt="">
+    </a>
+    <label class="admin-menu-toggle" for="admin-menu" aria-label="Open admin menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav class="admin-nav" aria-label="Admin navigation">
+      <a href="{% url 'backoffice_bookings' %}{{ admin_lang_query }}">{{ admin_copy.nav.bookings }}</a>
+      <a href="{% url 'backoffice_posts' %}{{ admin_lang_query }}">{{ admin_copy.nav.posts }}</a>
+      <a href="/{{ admin_locale }}/">{{ admin_copy.nav.viewSite }}</a>
+    </nav>
+    <details class="admin-lang-switcher">
+      <summary aria-label="{{ admin_copy.language }}">
+        <span aria-hidden="true">{{ admin_locale_flag }}</span>
+        {{ admin_locale_label }}
+        <span aria-hidden="true">▾</span>
+      </summary>
+      <div>
+        {% for item in admin_language_links %}
+          <a aria-current="{% if item.active %}true{% endif %}" href="{{ item.url }}">
+            <span aria-hidden="true">{{ item.flag }}</span>
+            {{ item.label }}
+          </a>
+        {% endfor %}
+      </div>
+    </details>
+    <form class="admin-logout" method="post" action="{% url 'backoffice_logout' %}{{ admin_lang_query }}">
+      {% csrf_token %}
+      <button class="admin-ghost" type="submit">{{ admin_copy.nav.logout }}</button>
+    </form>
+  </aside>
+
+  <section class="admin-main">
+    <header class="admin-header">
+      <p class="admin-eyebrow">{{ admin_copy.control }}</p>
+      <h1>{{ admin_title }}</h1>
+    </header>
+    {% block admin_content %}{% endblock %}
+  </section>
+</main>
+{% endblock %}

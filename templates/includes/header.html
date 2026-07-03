@@ -1,0 +1,47 @@
+{% load static %}
+<header class="header" data-header>
+  <a class="wordmark" href="/{{ locale }}/#top" aria-label="{{ copy.header.brand }} home">
+    <span class="wordmark__seal wordmark__seal--logo">
+      <img src="{{ site_logo_url }}" alt="">
+    </span>
+    <span class="wordmark__text">
+      <strong>{{ copy.header.brand }}</strong>
+      <span>{{ copy.header.tagline }}</span>
+    </span>
+  </a>
+
+  <div class="header-tools">
+    <details class="lang-switcher lang-switcher--dropdown">
+      <summary class="lang-switcher__button" aria-haspopup="true" aria-label="Choose language">
+        <span class="lang-switcher__flag" aria-hidden="true">{{ locale_flag }}</span>
+        <span class="lang-switcher__code">{{ locale_label }}</span>
+        <span class="lang-switcher__chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="lang-switcher__menu" role="listbox" aria-label="Language selector">
+        {% for item in language_links %}
+          <a class="lang-switcher__link{% if item.active %} is-active{% endif %}" href="{{ item.url }}" role="option" aria-selected="{{ item.active|yesno:'true,false' }}">
+            <span class="lang-switcher__flag" aria-hidden="true">{{ item.flag }}</span>
+            <span class="lang-switcher__code">{{ item.label }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </details>
+
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="nav-panel" data-panel>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="/{{ locale }}/#jingisukan">{{ copy.header.nav.about }}</a>
+      <a href="/{{ locale }}/#ritual">{{ copy.header.nav.ritual }}</a>
+      <a href="/{{ locale }}/#passion">{{ copy.header.nav.passion }}</a>
+      <a href="/{{ locale }}/blog/">{{ copy.header.nav.blog }}</a>
+      <a href="/{{ locale }}/#access">{{ copy.header.nav.access }}</a>
+    </nav>
+    <a class="header-cta" href="/{{ locale }}/#booking">{{ copy.header.reserve }}</a>
+  </div>
+</header>

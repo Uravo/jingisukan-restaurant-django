@@ -1,0 +1,37 @@
+{% extends "backoffice/base.html" %}
+{% block title %}{{ admin_copy.login.title }}{% endblock %}
+{% block body %}
+<main class="admin-login">
+  <form class="admin-login__card" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="admin_lang" value="{{ admin_locale }}">
+    <div class="admin-login__mark admin-login__mark--logo"><img src="{{ site_logo_url }}" alt=""></div>
+    <div class="admin-login__topline">
+      <p class="admin-eyebrow">{{ admin_copy.login.eyebrow }}</p>
+      <details class="admin-lang-switcher admin-lang-switcher--login">
+        <summary aria-label="{{ admin_copy.language }}">
+          <span aria-hidden="true">{{ admin_locale_flag }}</span>
+          {{ admin_locale_label }}
+          <span aria-hidden="true">▾</span>
+        </summary>
+        <div>
+          {% for item in admin_language_links %}
+            <a aria-current="{% if item.active %}true{% endif %}" href="{{ item.url }}">
+              <span aria-hidden="true">{{ item.flag }}</span>
+              {{ item.label }}
+            </a>
+          {% endfor %}
+        </div>
+      </details>
+    </div>
+    <h1>{{ admin_copy.login.title }}</h1>
+    <p>{{ admin_copy.login.intro }}</p>
+    <label>
+      <span>{{ admin_copy.login.password }}</span>
+      <input type="password" name="password" autocomplete="current-password" required>
+    </label>
+    {% for message in messages %}<p class="admin-error">{{ message }}</p>{% endfor %}
+    <button class="admin-button" type="submit">{{ admin_copy.login.submit }}</button>
+  </form>
+</main>
+{% endblock %}

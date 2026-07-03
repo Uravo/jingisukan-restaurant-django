@@ -1,0 +1,18 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Back office{% endblock %}</title>
+  <link rel="icon" href="{% static 'assets/images/logo.jpg' %}" type="image/jpeg">
+  <link rel="apple-touch-icon" href="{% static 'assets/images/logo.jpg' %}">
+  <link rel="stylesheet" href="{% static 'css/globals.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support.css' %}">
+  <link rel="stylesheet" href="{% static 'css/admin_blog.css' %}">
+</head>
+<body>
+  {% block body %}{% endblock %}
+  <script src="{% static 'js/backoffice.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "backoffice/shell.html" %}
+{% block title %}{{ admin_title }}{% endblock %}
+{% block admin_content %}
+<form class="admin-form admin-post-form" method="post" enctype="multipart/form-data" data-admin-language-tabs>
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <section class="admin-common-panel">
+    <p class="admin-eyebrow">Common</p>
+    <div class="admin-form__grid">
+      <label><span>{{ admin_copy.postForm.slug }}</span>{{ form.slug }}</label>
+      <label><span>{{ admin_copy.postForm.date }}</span>{{ form.date }}</label>
+      <label><span>{{ admin_copy.postForm.status }}</span>{{ form.status }}</label>
+    </div>
+    <div class="admin-image-fields">
+      <label><span>{{ admin_copy.postForm.imagePath }}</span>{{ form.image }}</label>
+      <label><span>{{ admin_copy.postForm.uploadImage }}</span>{{ form.image_file }}</label>
+    </div>
+  </section>
+
+  <div class="admin-language-tabs" role="tablist" aria-label="Blog post languages">
+    <button class="is-active" type="button" data-admin-tab="en" role="tab" aria-selected="true">EN</button>
+    <button type="button" data-admin-tab="jp" role="tab" aria-selected="false">JP</button>
+    <button type="button" data-admin-tab="ru" role="tab" aria-selected="false">RU</button>
+    <button type="button" data-admin-tab="uz" role="tab" aria-selected="false">UZ</button>
+  </div>
+
+  <div class="admin-lang-grid admin-lang-grid--single">
+    <section class="admin-lang-panel is-active" data-admin-panel="en"><h2>English</h2><label><span>{{ admin_copy.postForm.title }}</span>{{ form.title_en }}</label><label><span>{{ admin_copy.postForm.summary }}</span>{{ form.summary_en }}</label><label><span>{{ admin_copy.postForm.content }}</span>{{ form.content_en }}</label></section>
+    <section class="admin-lang-panel" data-admin-panel="jp" hidden><h2>Japanese</h2><label><span>{{ admin_copy.postForm.title }}</span>{{ form.title_jp }}</label><label><span>{{ admin_copy.postForm.summary }}</span>{{ form.summary_jp }}</label><label><span>{{ admin_copy.postForm.content }}</span>{{ form.content_jp }}</label></section>
+    <section class="admin-lang-panel" data-admin-panel="ru" hidden><h2>Russian</h2><label><span>{{ admin_copy.postForm.title }}</span>{{ form.title_ru }}</label><label><span>{{ admin_copy.postForm.summary }}</span>{{ form.summary_ru }}</label><label><span>{{ admin_copy.postForm.content }}</span>{{ form.content_ru }}</label></section>
+    <section class="admin-lang-panel" data-admin-panel="uz" hidden><h2>Uzbek</h2><label><span>{{ admin_copy.postForm.title }}</span>{{ form.title_uz }}</label><label><span>{{ admin_copy.postForm.summary }}</span>{{ form.summary_uz }}</label><label><span>{{ admin_copy.postForm.content }}</span>{{ form.content_uz }}</label></section>
+  </div>
+
+  <div class="admin-actions">
+    <button class="admin-button" type="submit">{% if post %}{{ admin_copy.postForm.save }}{% else %}{{ admin_copy.postForm.create }}{% endif %}</button>
+    <a class="admin-ghost" href="{% url 'backoffice_posts' %}{{ admin_lang_query }}">{{ admin_copy.confirm.cancel }}</a>
+  </div>
+</form>
+{% endblock %}

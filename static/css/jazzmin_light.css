@@ -1,0 +1,182 @@
+/* Light, readable Jazzmin admin theme */
+:root {
+  --ji-blue: #2563eb;
+  --ji-blue-dark: #1d4ed8;
+  --ji-blue-soft: rgba(37, 99, 235, .1);
+  --ji-ink: #111827;
+  --ji-muted: #4b5563;
+  --ji-line: #e5e7eb;
+  --ji-soft: #f8fafc;
+}
+
+body,
+.wrapper,
+.content-wrapper,
+.main-footer {
+  background: #fff !important;
+  color: var(--ji-ink) !important;
+}
+
+a,
+.page-link,
+.breadcrumb-item a,
+.navbar-light .navbar-nav .nav-link {
+  color: var(--ji-blue) !important;
+}
+
+a:hover,
+.page-link:hover,
+.breadcrumb-item a:hover,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: var(--ji-blue-dark) !important;
+}
+
+.main-header.navbar {
+  background: #fff !important;
+  border-bottom: 1px solid var(--ji-line) !important;
+  box-shadow: 0 8px 28px rgba(17, 24, 39, .04);
+}
+
+.main-sidebar,
+.brand-link {
+  background: #fff !important;
+  color: var(--ji-ink) !important;
+}
+
+.main-sidebar {
+  border-right: 1px solid var(--ji-line) !important;
+  box-shadow: 10px 0 28px rgba(17, 24, 39, .04);
+}
+
+.brand-link {
+  border-bottom: 1px solid var(--ji-line) !important;
+}
+
+.brand-link .brand-text,
+[class*=sidebar-light-] .user-panel a,
+[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link,
+[class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link {
+  color: var(--ji-ink) !important;
+}
+
+[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link:hover,
+[class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover,
+[class*=sidebar-light-] .nav-sidebar > .nav-item.menu-open > .nav-link,
+[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link.active {
+  background: var(--ji-blue-soft) !important;
+  color: var(--ji-blue-dark) !important;
+}
+
+.nav-sidebar .nav-link p,
+.nav-sidebar .nav-link i {
+  color: inherit !important;
+}
+
+.content-header h1,
+.card-title,
+.card-header,
+.card-body,
+.table,
+.table td,
+.table th,
+.form-group label,
+.help,
+.helptext,
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--ji-ink) !important;
+}
+
+.text-muted,
+.small-box-footer,
+.breadcrumb-item.active,
+.help,
+.helptext {
+  color: var(--ji-muted) !important;
+}
+
+.card,
+.callout,
+.login-card-body,
+.register-card-body {
+  background: #fff !important;
+  border: 1px solid var(--ji-line) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 14px 34px rgba(17, 24, 39, .06) !important;
+}
+
+.card-header {
+  background: var(--ji-soft) !important;
+  border-bottom: 1px solid var(--ji-line) !important;
+}
+
+.table thead th {
+  background: var(--ji-soft) !important;
+  border-bottom: 1px solid var(--ji-line) !important;
+}
+
+.table td,
+.table th {
+  border-top-color: var(--ji-line) !important;
+}
+
+.table-hover tbody tr:hover,
+.table tbody tr:hover {
+  background: rgba(37, 99, 235, .045) !important;
+}
+
+.form-control,
+.custom-select,
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+  background: #fff !important;
+  border-color: #d1d5db !important;
+  color: var(--ji-ink) !important;
+}
+
+.form-control:focus,
+.custom-select:focus,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default .select2-selection--single:focus {
+  border-color: var(--ji-blue) !important;
+  box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .16) !important;
+}
+
+.btn-primary,
+.btn-success,
+.object-tools .btn,
+.submit-row input.default {
+  background: var(--ji-blue) !important;
+  border-color: var(--ji-blue) !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.object-tools .btn:hover,
+.submit-row input.default:hover {
+  background: var(--ji-blue-dark) !important;
+  border-color: var(--ji-blue-dark) !important;
+  color: #fff !important;
+}
+
+.btn-outline-secondary:hover,
+.btn-default:hover {
+  background: var(--ji-blue-soft) !important;
+  border-color: var(--ji-blue) !important;
+  color: var(--ji-blue-dark) !important;
+}
+
+.badge-primary,
+.bg-primary,
+.accent-primary .btn-link,
+.accent-primary a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.page-link):not(.btn) {
+  color: var(--ji-blue) !important;
+}
+
+.login-page {
+  background: #fff !important;
+}
+
+.login-logo a {
+  color: var(--ji-ink) !important;
+}

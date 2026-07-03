@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<main class="page">
+  {% include "includes/header.html" %}
+
+  <section id="top" class="hero">
+    <div class="hero__bg" aria-hidden="true">
+      <img src="{% static 'assets/images/restaurant-hero.png' %}" alt="">
+    </div>
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__plate" aria-hidden="true">
+      <img src="{% static 'assets/images/restaurant-hero-circle.png' %}" alt="">
+    </div>
+    <div class="steam" aria-hidden="true">
+      <span style="--x: 66%; --y: 27%"></span>
+      <span style="--x: 77%; --y: 34%"></span>
+      <span style="--x: 58%; --y: 39%"></span>
+    </div>
+
+    <div class="hero__content reveal">
+      <p class="eyebrow">{{ copy.hero.eyebrow }}</p>
+      <h1>{{ copy.hero.title }}</h1>
+      <p class="hero__lead">{{ copy.hero.lead }}</p>
+      <div class="hero__notes" aria-label="Restaurant quick facts">
+        <span>{{ copy.hero.hours }}</span>
+        <span>{{ copy.hero.district }}</span>
+      </div>
+      {% include "includes/socials.html" %}
+    </div>
+
+    <div class="hero__rail" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {% for item in marquee_items %}<span>{{ item }}</span>{% endfor %}
+    </div>
+  </div>
+
+  <section id="jingisukan" class="section culture">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ copy.culture.eyebrow }}</p>
+      <h2>{{ copy.culture.title }}</h2>
+      <p>{{ copy.culture.intro }}</p>
+    </div>
+
+    <div class="culture-layout">
+      <article class="culture-story reveal">
+        <div class="culture-story__stamp" aria-hidden="true">羊</div>
+        <h3>{{ copy.culture.cardTitle }}</h3>
+        {% for paragraph in copy.culture.body %}<p>{{ paragraph }}</p>{% endfor %}
+      </article>
+
+      <div class="culture-steps">
+        {% for step in copy.culture.steps %}
+          <article class="culture-step reveal">
+            <span class="culture-step__num">0{{ forloop.counter }}</span>
+            <div>
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.body }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="ritual" class="section ritual">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ copy.ritual.eyebrow }}</p>
+      <h2>{{ copy.ritual.title }}</h2>
+      <p>{{ copy.ritual.intro }}</p>
+    </div>
+
+    <div class="ritual__grid">
+      {% for step in copy.ritual.steps %}
+        <article class="ritual-step reveal">
+          <div class="ritual-step__number">{{ forloop.counter }}</div>
+          <div class="ritual-step__card">
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.body|safe }}</p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="passion" class="section passion">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ copy.passion.eyebrow }}</p>
+      <h2>{{ copy.passion.title }}</h2>
+      <p>{{ copy.passion.intro }}</p>
+    </div>
+
+    <div class="poster reveal">
+      <div class="poster__lead">
+        <h3>{{ copy.passion.leadTitle }}</h3>
+        <p>{{ copy.passion.lead }}</p>
+      </div>
+
+      <div class="poster__main">
+        {% for feature in copy.passion.features %}
+          <article class="poster-feature">
+            <div class="poster-feature__photo">
+              <img src="{% static feature.image %}" alt="{{ feature.alt }}">
+            </div>
+            <div class="poster-feature__copy">
+              <span>{{ feature.eyebrow }}</span>
+              <h4>{{ feature.title }}</h4>
+              <p>{{ feature.body }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section journal">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ copy.journal.eyebrow }}</p>
+      <h2>{{ copy.journal.title }}</h2>
+      <p>{{ copy.journal.intro }}</p>
+    </div>
+
+    <div class="journal-grid">
+      {% for post in posts %}
+        <a class="journal-card reveal" href="{{ post.url }}">
+          <img src="{{ post.image }}" alt="{{ post.title }}">
+          <div class="journal-card__body">
+            <p class="eyebrow">{{ post.date }}</p>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.summary }}</p>
+          </div>
+        </a>
+      {% empty %}
+        <p class="empty-note">{{ copy.journal.empty }}</p>
+      {% endfor %}
+    </div>
+
+    <div class="section-actions reveal">
+      <a class="button button-dark" href="/{{ locale }}/blog/">{{ copy.journal.viewAll }}</a>
+    </div>
+  </section>
+
+  <section id="access" class="section visit">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ copy.visit.eyebrow }}</p>
+      <h2>{{ copy.visit.title }}</h2>
+      <p>{{ copy.visit.intro }}</p>
+    </div>
+
+    <div class="visit-layout">
+      {% if map_iframe_src %}
+        <div class="visit-map visit-map--iframe reveal">
+          <iframe src="{{ map_iframe_src }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="{{ copy.visit.address }}"></iframe>
+        </div>
+      {% else %}
+        <div class="visit-map reveal">
+          <div class="visit-map__content">
+            <p class="eyebrow">{{ copy.visit.city }}</p>
+            <strong>{{ copy.visit.street }}</strong>
+            <p>{{ copy.visit.district }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="visit-details visit-details--simple reveal">
+        <div class="visit-details__item">
+          <span class="visit-details__label">{{ copy.visit.addressLabel }}</span>
+          <p class="visit-details__value">{{ copy.visit.address }}</p>
+        </div>
+        <div class="visit-details__item">
+          <span class="visit-details__label">{{ copy.visit.hoursLabel }}</span>
+          <p class="visit-details__value"><strong>10:00 - 23:00</strong></p>
+        </div>
+        <div class="visit-details__item">
+          <span class="visit-details__label">{{ copy.visit.followLabel }}</span>
+          <div class="visit-details__value">
+            <p>{{ copy.visit.follow }}</p>
+            {% include "includes/socials.html" with compact=True %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="section booking">
+    <div class="booking-wrap">
+      <div class="booking-copy reveal">
+        <p class="eyebrow">{{ copy.booking.eyebrow }}</p>
+        <h2>{{ copy.booking.title }}</h2>
+        <p>{{ copy.booking.intro }}</p>
+      </div>
+
+      <form class="booking-form reveal visible" method="post" action="/{{ locale }}/bookings/create/" data-booking-form data-locale="{{ locale }}" data-submit-default="{{ copy.booking.submit }}" data-submit-loading="{{ copy.booking.loading }}" data-validation-message="{{ copy.booking.validation }}" data-error-message="{{ copy.booking.error }}">
+        {% csrf_token %}
+        <input type="hidden" name="locale" value="{{ locale }}">
+        <label class="field">
+          <span>{{ copy.booking.name }}</span>
+          <input name="customer_name" autocomplete="name" required>
+        </label>
+        <label class="field">
+          <span>{{ copy.booking.phone }}</span>
+          <input type="tel" name="phone" autocomplete="tel" required>
+        </label>
+        <label class="field">
+          <span>{{ copy.booking.date }}</span>
+          <input type="date" name="booking_date" min="{{ booking_window.min_date }}" value="{{ booking_window.min_date }}" data-booking-date required>
+        </label>
+        <label class="field">
+          <span>{{ copy.booking.time }}</span>
+          <input type="time" name="booking_time" min="{{ booking_window.min_time }}" max="{{ booking_window.max_time }}" step="900" value="{{ booking_window.min_time }}" required>
+        </label>
+        <label class="field">
+          <span>{{ copy.booking.guests }}</span>
+          <input type="number" name="people_count" min="1" max="60" required>
+        </label>
+        <button class="button button-primary submit" type="submit">
+          <span data-submit-text>{{ copy.booking.submit }}</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p class="message" aria-live="polite" data-message>{% for message in messages %}{{ message }}{% endfor %}</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="eyebrow">{{ copy.footer.eyebrow }}</p>
+    <h2>{{ copy.footer.title }}</h2>
+    <p>{{ copy.footer.intro }}</p>
+    <div class="footer__actions">
+      <a class="button button-primary" href="#booking">{{ copy.header.reserve }}</a>
+    </div>
+    <small>{{ copy.footer.small }}</small>
+  </footer>
+
+  <div class="modal" data-modal {% if not booking_saved %}hidden{% endif %} {% if booking_saved %}data-open{% endif %}>
+    <button class="modal-backdrop" type="button" aria-label="Close" data-close></button>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="success-title">
+      <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+      <div class="check" aria-hidden="true">
+        <svg viewBox="0 0 52 52">
+          <circle cx="26" cy="26" r="24"></circle>
+          <path d="M15 27.5 22.5 35 38 18"></path>
+        </svg>
+      </div>
+      <h3 id="success-title">{{ copy.booking.successTitle }}</h3>
+      <p>{{ copy.booking.successBody }}</p>
+      <button class="button button-dark" type="button" data-close>{{ copy.booking.done }}</button>
+    </div>
+  </div>
+</main>
+{% endblock %}

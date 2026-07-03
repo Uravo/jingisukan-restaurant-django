@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="page blog-shell">
+  {% include "includes/header.html" %}
+  <article class="blog-article">
+    <a class="back-link" href="/{{ locale }}/blog/">{{ copy.blog.back }}</a>
+    <p class="eyebrow">{{ post.date }}</p>
+    <h1>{{ post.title }}</h1>
+    <p class="blog-article__summary">{{ post.summary }}</p>
+    <img src="{{ post.image }}" alt="">
+    <div class="blog-article__body">
+      {{ post_content|safe }}
+    </div>
+  </article>
+</main>
+{% endblock %}

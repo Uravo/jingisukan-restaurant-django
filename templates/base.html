@@ -1,0 +1,18 @@
+{% load static %}
+<!doctype html>
+<html lang="{{ html_lang|default:'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ meta_title }}</title>
+  <meta name="description" content="{{ meta_description }}">
+  <link rel="icon" href="{% static 'assets/images/logo.jpg' %}" type="image/jpeg">
+  <link rel="apple-touch-icon" href="{% static 'assets/images/logo.jpg' %}">
+  <link rel="stylesheet" href="{% static 'css/globals.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support.css' %}">
+</head>
+<body>
+  {% block body %}{% endblock %}
+  <script src="{% static 'js/site.js' %}" defer></script>
+</body>
+</html>

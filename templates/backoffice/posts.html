@@ -1,0 +1,47 @@
+{% extends "backoffice/shell.html" %}
+{% block title %}{{ admin_copy.posts.title }}{% endblock %}
+{% block admin_content %}
+<div class="admin-toolbar">
+  <p>{{ admin_copy.posts.intro }}</p>
+  <a class="admin-button" href="{% url 'backoffice_post_new' %}{{ admin_lang_query }}">{{ admin_copy.posts.newPost }}</a>
+</div>
+
+{% if posts %}
+  <div class="admin-post-list">
+    {% for post in posts %}
+      <article class="admin-post">
+        <img src="{{ post.image_url }}" alt="">
+        <div>
+          <span class="admin-status admin-status--{{ post.status }}">{{ post.status_label }}</span>
+          <h2>{{ post.title }}</h2>
+          <p>{{ post.summary }}</p>
+          <small>/blog/{{ post.slug }} - {{ post.date }}</small>
+        </div>
+        <div class="admin-post__actions">
+          <a class="admin-ghost" href="{% url 'backoffice_post_edit' post.id %}{{ admin_lang_query }}">{{ admin_copy.posts.edit }}</a>
+          <form class="admin-delete-form" method="post" action="{% url 'backoffice_post_delete' post.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="lang" value="{{ admin_locale }}">
+            <input class="admin-confirm-state" id="admin-delete-post-{{ post.id }}" type="checkbox">
+            <label class="admin-danger" for="admin-delete-post-{{ post.id }}" role="button">{{ admin_copy.confirm.delete }}</label>
+            <div class="admin-confirm" role="presentation">
+              <label class="admin-confirm__backdrop" for="admin-delete-post-{{ post.id }}" aria-label="{{ admin_copy.confirm.cancel }}"></label>
+              <div class="admin-confirm__dialog" role="dialog" aria-modal="true" aria-labelledby="admin-delete-post-title-{{ post.id }}">
+                <p class="admin-eyebrow">{{ admin_copy.confirm.eyebrow }}</p>
+                <h2 id="admin-delete-post-title-{{ post.id }}">{{ admin_copy.posts.deleteTitle }}</h2>
+                <p>{{ post.delete_message }}</p>
+                <div class="admin-confirm__actions">
+                  <label class="admin-ghost" for="admin-delete-post-{{ post.id }}" role="button">{{ admin_copy.confirm.cancel }}</label>
+                  <button class="admin-danger" type="submit">{{ admin_copy.confirm.delete }}</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="admin-empty">{{ admin_copy.posts.empty }}</p>
+{% endif %}
+{% endblock %}

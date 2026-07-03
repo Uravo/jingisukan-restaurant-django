@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="page blog-shell">
+  {% include "includes/header.html" %}
+  <section class="blog-hero">
+    <p class="eyebrow">{{ copy.blog.eyebrow }}</p>
+    <h1>{{ copy.blog.title }}</h1>
+    <p>{{ copy.blog.intro }}</p>
+  </section>
+  <section class="blog-list section">
+    {% if posts %}
+      <div class="journal-grid journal-grid--wide">
+        {% for post in posts %}
+          <a class="journal-card" href="{{ post.url }}">
+            <img src="{{ post.image }}" alt="">
+            <div class="journal-card__body">
+              <p class="eyebrow">{{ post.date }}</p>
+              <h3>{{ post.title }}</h3>
+              <p>{{ post.summary }}</p>
+              <span class="text-link">{{ copy.blog.readMore }}</span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="empty-note">{{ copy.blog.empty }}</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}
