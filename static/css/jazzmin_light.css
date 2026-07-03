@@ -180,3 +180,48 @@ a:hover,
 .login-logo a {
   color: var(--ji-ink) !important;
 }
+
+/* Jazzmin login polish */
+.login-page {
+  min-height: 100vh !important;
+  background: #f8fafc !important;
+}
+
+.login-box {
+  width: min(360px, calc(100vw - 32px)) !important;
+}
+
+.login-logo {
+  margin-bottom: 18px !important;
+  text-align: center !important;
+}
+
+.login-logo a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 14px 20px !important;
+  background: #fff !important;
+  border: 1px solid var(--ji-line) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 44px rgba(17, 24, 39, .08) !important;
+}
+
+.login-logo img {
+  display: block !important;
+  width: auto !important;
+  max-width: 240px !important;
+  max-height: 72px !important;
+  object-fit: contain !important;
+}
+
+.login-card-body {
+  padding: 26px 24px 24px !important;
+}
+
+.login-card-body .login-box-msg {
+  color: var(--ji-ink) !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  padding: 0 0 18px !important;
+}

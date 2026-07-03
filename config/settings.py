@@ -102,7 +102,7 @@ JAZZMIN_SETTINGS = {
     "site_header": "Jingisukan Izakaya",
     "site_brand": "Jingisukan",
     "site_logo": "assets/images/logo.jpg",
-    "login_logo": "assets/images/logo.jpg",
+    "login_logo": "assets/images/logo-header-200x60.png",
     "site_icon": "assets/images/logo.jpg",
     "site_logo_classes": "img-circle elevation-2",
     "custom_css": "css/jazzmin_light.css",
