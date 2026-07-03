@@ -225,3 +225,24 @@ a:hover,
   line-height: 1.35 !important;
   padding: 0 0 18px !important;
 }
+
+/* Hard guard for Jazzmin default login template */
+.jazzmin-login-page .login-logo h1 {
+  margin: 0 !important;
+}
+
+.jazzmin-login-page .login-logo picture,
+.jazzmin-login-page .login-logo a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.jazzmin-login-page .login-logo img {
+  display: block !important;
+  width: 220px !important;
+  max-width: calc(100vw - 96px) !important;
+  height: auto !important;
+  max-height: 72px !important;
+  object-fit: contain !important;
+}

@@ -1,0 +1,87 @@
+{% load i18n static jazzmin admin_urls %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% get_jazzmin_settings request as jazzmin_settings %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{% block title %}{{ title }} | {{ jazzmin_settings.site_title }}{% endblock %}</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
+
+    <!-- Bootstrap and adminLTE -->
+    <link rel="stylesheet" href="{% static "vendor/adminlte/css/adminlte.min.css" %}">
+
+    <!-- Bootswatch theme -->
+    {% if jazzmin_ui.theme.name != 'default' %}
+        <link rel="stylesheet" href="{{ jazzmin_ui.theme.src }}" id="jazzmin-theme" />
+    {% endif %}
+
+    {% if jazzmin_ui.dark_mode_theme %}
+        <link rel="stylesheet" href="{{ jazzmin_ui.dark_mode_theme.src }}" id="jazzmin-dark-mode-theme" media="(prefers-color-scheme: dark)"/>
+    {% endif %}
+
+    <!-- Custom fixes for django -->
+    <link rel="stylesheet" href="{% static "jazzmin/css/main.css" %}">
+
+    {% if jazzmin_settings.custom_css %}
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static jazzmin_settings.custom_css %}">
+    {% endif %}
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="{% static jazzmin_settings.site_icon %}" type="image/png">
+    <link rel="icon" href="{% static jazzmin_settings.site_icon %}" sizes="32x32" type="image/png">
+
+    {% if jazzmin_settings.use_google_fonts_cdn %}
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    {% endif %}
+    <style>
+        .ji-admin-login { background: #f8fafc !important; }
+        .ji-admin-login .login-box { width: min(360px, calc(100vw - 32px)) !important; }
+        .ji-login-logo { margin-bottom: 18px !important; text-align: center !important; }
+        .ji-login-logo a { display: inline-flex !important; align-items: center !important; justify-content: center !important; padding: 14px 20px !important; background: #fff !important; border: 1px solid #e5e7eb !important; border-radius: 18px !important; box-shadow: 0 18px 44px rgba(17, 24, 39, .08) !important; }
+        .ji-login-logo img { display: block !important; width: 220px !important; max-width: calc(100vw - 96px) !important; height: auto !important; max-height: 72px !important; object-fit: contain !important; }
+        .ji-admin-login .card { border: 1px solid #e5e7eb !important; border-radius: 12px !important; box-shadow: 0 14px 34px rgba(17, 24, 39, .06) !important; }
+    </style>
+
+    {% block extrastyle %} {% endblock %}
+    {% block extrahead %} {% endblock %}
+</head>
+<body class="hold-transition jazzmin-login-page ji-admin-login">
+
+<div class="login-box">
+    <div class="login-logo ji-login-logo">
+        <a href="{% url 'admin:index' %}" aria-label="{{ jazzmin_settings.site_header }}">
+            <img src="{% static 'assets/images/logo-header-200x60.png' %}" alt="{{ jazzmin_settings.site_header }}">
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'vendor/adminlte/js/adminlte.min.js' %}"></script>
+
+{% if jazzmin_settings.custom_js %}
+    <script src="{% static jazzmin_settings.custom_js %}"></script>
+{% endif %}
+
+</body>
+</html>
