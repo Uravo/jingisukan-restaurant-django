@@ -106,7 +106,6 @@ JAZZMIN_SETTINGS = {
     "login_logo": "assets/images/logo-header-200x60.png",
     "site_icon": "assets/images/logo.jpg",
     "site_logo_classes": "img-circle elevation-2",
-    "custom_css": "css/jazzmin_light.css",
     "welcome_sign": "Welcome to Jingisukan Izakaya back office",
     "copyright": "Jingisukan Izakaya",
     "search_model": ["core.Booking", "core.BlogPost"],
@@ -125,17 +124,4 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
 }
 
-JAZZMIN_UI_TWEAKS = {
-    "theme": "flatly",
-    "navbar": "navbar-white navbar-light",
-    "sidebar": "sidebar-light-primary",
-    "accent": "accent-primary",
-    "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-outline-secondary",
-        "info": "btn-info",
-        "warning": "btn-warning",
-        "danger": "btn-outline-danger",
-        "success": "btn-success",
-    },
-}
+JAZZMIN_UI_TWEAKS = {}
