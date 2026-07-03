@@ -54,8 +54,9 @@ class RestaurantSettingsForm(forms.ModelForm):
 
     class Meta:
         model = RestaurantSettings
-        fields = ["logo", "logo_path", "backoffice_password", "map_iframe_src"]
+        fields = ["logo", "logo_path", "meta_description", "backoffice_password", "map_iframe_src"]
         widgets = {
+            "meta_description": forms.Textarea(attrs={"rows": 3}),
             "map_iframe_src": forms.Textarea(attrs={"rows": 4}),
         }
 

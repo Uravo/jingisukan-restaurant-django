@@ -90,6 +90,11 @@ class RestaurantSettings(models.Model):
         help_text="Fallback static logo path. Used when no logo file is uploaded.",
     )
     backoffice_password_hash = models.CharField(max_length=255, blank=True, editable=False)
+    meta_description = models.TextField(
+        blank=True,
+        default="",
+        help_text="Default SEO meta description for the landing pages. Leave empty to use translated defaults.",
+    )
     map_iframe_src = models.TextField(
         blank=True,
         default=DEFAULT_MAP_IFRAME_SRC,

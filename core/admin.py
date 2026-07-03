@@ -37,6 +37,7 @@ class RestaurantSettingsAdmin(admin.ModelAdmin):
     list_display = ("__str__", "updated_at")
     fieldsets = (
         ("Logo", {"fields": ("logo", "logo_path")}),
+        ("SEO", {"fields": ("meta_description",)}),
         ("Backoffice access", {"fields": ("backoffice_password",)}),
         ("Map", {"fields": ("map_iframe_src",)}),
     )

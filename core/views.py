@@ -56,7 +56,7 @@ def _base_context(locale: str) -> dict:
         "site_logo_url": site_settings.logo_url,
         "map_iframe_src": site_settings.map_embed_src,
         "meta_title": copy["meta"]["title"],
-        "meta_description": copy["meta"]["description"],
+        "meta_description": site_settings.meta_description or copy["meta"]["description"],
     }
 
 
