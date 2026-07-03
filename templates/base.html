@@ -5,7 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ meta_title }}</title>
+  {% if meta_head_code %}
+  {{ meta_head_code|safe }}
+  {% else %}
   <meta name="description" content="{{ meta_description }}">
+  {% endif %}
   <link rel="icon" href="{% static 'assets/images/logo.jpg' %}" type="image/jpeg">
   <link rel="apple-touch-icon" href="{% static 'assets/images/logo.jpg' %}">
   <link rel="stylesheet" href="{% static 'css/globals.css' %}">

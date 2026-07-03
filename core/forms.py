@@ -55,8 +55,14 @@ class RestaurantSettingsForm(forms.ModelForm):
     class Meta:
         model = RestaurantSettings
         fields = ["logo", "logo_path", "meta_description", "backoffice_password", "map_iframe_src"]
+        labels = {
+            "meta_description": "Custom meta/head code",
+        }
+        help_texts = {
+            "meta_description": "Paste full meta tags or other trusted head code. If empty, the translated default description is used.",
+        }
         widgets = {
-            "meta_description": forms.Textarea(attrs={"rows": 3}),
+            "meta_description": forms.Textarea(attrs={"rows": 7, "placeholder": "<meta name=\"description\" content=\"...\">\n<meta property=\"og:title\" content=\"...\">"}),
             "map_iframe_src": forms.Textarea(attrs={"rows": 4}),
         }
 

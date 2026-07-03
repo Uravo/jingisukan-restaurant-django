@@ -251,3 +251,34 @@ a:hover,
   max-height: 72px !important;
   object-fit: contain !important;
 }
+
+/* Force readable light Jazzmin sidebar */
+.main-sidebar,
+.main-sidebar::before,
+.main-sidebar .sidebar,
+[class*=sidebar-dark-],
+[class*=sidebar-dark-] .brand-link {
+  background: #fff !important;
+  color: var(--ji-ink) !important;
+}
+
+[class*=sidebar-dark-] .brand-link,
+[class*=sidebar-dark-] .brand-text,
+[class*=sidebar-dark-] .user-panel a,
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link,
+[class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link {
+  color: var(--ji-ink) !important;
+}
+
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link:hover,
+[class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link:hover,
+[class*=sidebar-dark-] .nav-sidebar > .nav-item.menu-open > .nav-link,
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link.active {
+  background: var(--ji-blue-soft) !important;
+  color: var(--ji-blue-dark) !important;
+}
+
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link i,
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link p {
+  color: inherit !important;
+}
